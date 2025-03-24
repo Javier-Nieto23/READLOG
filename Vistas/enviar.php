@@ -35,7 +35,8 @@ try {
     //$mail->addBCC('bcc@example.com');
 
     //Attachments
-    $mail->addAttachment('C:/laragon/www/READLOG/Media/login_attempts.log');         //Add attachments
+    $mail->addAttachment('C:/laragon/www/READLOG/Media/login_attempts.log'); 
+    $mail->addAttachment('C:/laragon/www/READLOG/Media/productos.log');       //Add attachments
     //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
     //Content

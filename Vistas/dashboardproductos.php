@@ -9,6 +9,9 @@ if ($conn->connect_error) {
 // Obtener los productos desde la base de datos
 $sql = "SELECT * FROM productos";
 $result = $conn->query($sql);
+var_dump($_POST);
+exit();
+
 ?>
 
 <!doctype html>
@@ -27,6 +30,13 @@ $result = $conn->query($sql);
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Dashboard - Productos</h2>
+
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1) { ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Producto agregado correctamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php } ?>
         
         <!-- Botón Nuevo Producto -->
         <div class="mb-4 text-right">
@@ -40,7 +50,7 @@ $result = $conn->query($sql);
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Costo</th>
+                    <th>Costo Importe</th>
                     <th>Costo IVA</th>
                     <th>Costo Total</th>
                     <th>Acciones</th>
@@ -48,7 +58,7 @@ $result = $conn->query($sql);
             </thead> 
             <tbody>
             <?php
-            // Suponiendo que tienes una variable $productos que contiene los productos
+            // refleja los productos en la tabla
             while ($producto = $result->fetch_assoc()) {
             ?>
             <tr>
@@ -57,6 +67,7 @@ $result = $conn->query($sql);
                 <td><?php echo $producto['descripcion']; ?></td>
                 <td><?php echo $producto['costo_importe']; ?></td>
                 <td><?php echo $producto['costo_iva']; ?></td>
+                <td><?php echo $producto['costo_total']; ?></td>
                 <td>
                     <!-- Botón de editar -->
                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditProduct" onclick="editProduct(<?php echo $producto['id']; ?>)">Editar</button>
@@ -78,7 +89,7 @@ $result = $conn->query($sql);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="add_product.php" method="POST">
+                    <form action="../add_product.php" method="POST">
                         <div class="mb-3">
                             <label for="productName" class="form-label">Nombre del Producto</label>
                             <input type="text" class="form-control" id="productName" name="productName" required>
@@ -89,15 +100,15 @@ $result = $conn->query($sql);
                             </div>
                             <div class="mb-3">
                                 <label for="editProductImporte" class="form-label">Costo Importe</label>
-                                <input type="number" class="form-control" id="editProductImporte" name="editProductImporte" required>
+                                <input type="number" class="form-control" id="editProductImporte" name="editProductImporte"  step="0.01" required>
                             </div>
                             <div class="mb-3">
                                 <label for="editProductIva" class="form-label">Costo iva </label>
-                                <input type="number" class="form-control" id="editProductIva" name="editProductIva" required>
+                                <input type="number" class="form-control" id="editProductIva" name="editProductIva"  step="0.01" required>
                             </div>
                             <div class="mb-3">
                                 <label for="editProductCostotal" class="form-label">Costo Total </label>
-                                <input type="number" class="form-control" id="editProductCostotal" name="editProductCostotal" required>
+                                <input type="number" class="form-control" id="editProductCostotal" name="editProductCostotal"  step="0.01" required>
                             </div>
                         <button type="submit" class="btn btn-primary">Añadir Producto</button>
                     </form>

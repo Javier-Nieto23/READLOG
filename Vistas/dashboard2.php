@@ -47,32 +47,10 @@
         
     </div>
 
+   <!-- aqui se debera poner novedades de la pagina -->
     <div class="content">
-        <!-- Barra de navegación superior (menu de sesión) -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Mi Aplicación</a>
-                
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Notificaciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../logout.php">Cerrar sesión</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Contenido del Dashboard -->
-        
-    </div>
-
+        <h2>Bienvenido al Dashboard</h2>
+        <p>Este es un dashboard con menú de sesión en PHP.</p>
     <!-- Bootstrap JS y dependencias -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
