@@ -49,11 +49,7 @@ if (file_exists($ruta)) {
     foreach ($lineas as $linea) {
         $fecha = substr($linea, 0, 10);//formato ingles 2022-01-01
         $fechaSegmentada = explode("-", $fecha);
-        if (count($fechaSegmentada) == 3) {
-            $fecha = $fechaSegmentada[2]."-".$fechaSegmentada[1]."-".$fechaSegmentada[0];
-        } else {
-            $fecha = "Fecha inválida";
-        }
+        $fecha = $fechaSegmentada[2]."-".$fechaSegmentada[1]."-".$fechaSegmentada[0];
         $hora = substr($linea, 11, 8);
         $msg = substr($linea, 21);
 
@@ -73,5 +69,4 @@ if (file_exists($ruta)) {
 
 // Generar el PDF
 $pdf->Output();
-exit();
 ?>
