@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Escribir en el archivo de log
     file_put_contents('Media/login_attempts.log', $log_message, FILE_APPEND);
 
+
+
     $stmt->close();
 }
 

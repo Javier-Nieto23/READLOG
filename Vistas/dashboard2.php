@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Verificar si ya hay un usuario almacenado en la sesión
+if (!isset($_SESSION['usuario']) && isset($_POST['username'])) {
+    $_SESSION['usuario'] = $_POST['username']; // Guardar el usuario en la sesión
+}
+
+$usuario = $_SESSION['username']; // Obtener el nombre del usuario en sesión
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

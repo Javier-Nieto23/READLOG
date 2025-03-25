@@ -9,8 +9,6 @@ if ($conn->connect_error) {
 // Obtener los productos desde la base de datos
 $sql = "SELECT * FROM productos";
 $result = $conn->query($sql);
-var_dump($_POST);
-exit();
 
 ?>
 
