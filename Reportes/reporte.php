@@ -67,6 +67,40 @@ if (file_exists($ruta)) {
     $pdf->Cell(280,8,utf8_decode('Error: No se encontró el archivo de logs.'),1,1,'C');
 }
 
+// Agregar nueva página para productos.log
+$pdf->AddPage();
+$pdf->SetFont('Helvetica','B',12);
+$pdf->SetFillColor(200, 200, 200);
+$pdf->Cell(10,8,'N',1,0,'C',1);
+$pdf->Cell(20,8,'Fecha',1,0,'C',1);
+$pdf->Cell(20,8,'Hora',1,0,'C',1);
+$pdf->Cell(230,8,utf8_decode('Descripción'),1,1,'C',1);
+
+if (isset($_GET['productos'])) {
+    $productos_data = json_decode(urldecode($_GET['productos']), true);
+    if (!empty($productos_data)) {
+        $pdf->SetFont('Arial','',10);
+        $contador = 1; // Para numerar las filas
+        foreach ($productos_data as $producto) {
+            // Suponiendo que cada línea del archivo productos.log tiene el formato: "YYYY-MM-DD HH:MM:SS Descripción"
+            $fecha = substr($producto, 0, 10);
+            $hora = substr($producto, 11, 8);
+            $msg = substr($producto, 20);
+
+            $pdf->Cell(10,8,$contador,1,0,'C');
+            $pdf->Cell(20,8,$fecha,1,0,'C');
+            $pdf->Cell(20,8,$hora,1,0,'C');
+            $pdf->Cell(230,8,utf8_decode($msg),1,1,'L');
+
+            $contador++;
+        }
+    } else {
+        $pdf->Cell(280,8,utf8_decode('No hay datos de productos.'),1,1,'C');
+    }
+} else {
+    $pdf->Cell(280,8,utf8_decode('No se recibieron datos de productos.'),1,1,'C');
+}
+
 // Generar el PDF
 $pdf->Output();
 ?>

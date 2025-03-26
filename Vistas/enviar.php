@@ -11,6 +11,8 @@ require '../libs/vendor/autoload.php';
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
+$correo_enviado = false;
+
 try {
     //Server settings
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
@@ -46,8 +48,44 @@ try {
     //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    echo 'Mensaje ha sido enviado';
+    $correo_enviado = true;
 } catch (Exception $e) {
     echo "Mensaje no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
+}
+
+if ($correo_enviado) {
+    echo '<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Correo Enviado</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script>
+            function redirectToLogDashboard() {
+                window.location.href = "LogDashboard.php";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="modal" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Éxito</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Correo enviado exitosamente.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="redirectToLogDashboard()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>';
+} else {
+    echo '<p>Error al enviar el correo. Por favor, inténtelo de nuevo.</p>';
 }
 ?>
